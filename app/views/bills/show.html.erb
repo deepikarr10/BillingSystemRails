@@ -1,0 +1,69 @@
+<div class="page-container">
+  <h1>Billing Page</h1>
+
+    <p><strong>Customer Email:</strong> <%= @bill.customer.email %></p>
+
+    <hr>
+
+    <h3>Bill Section</h3>
+
+    <table>
+      <tr>
+        <th>Product ID</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Purchase Price</th>
+        <th>Tax</th>
+        <th>Total Price</th>
+      </tr>
+
+      <% @bill.bill_items.each do |item| %>
+        <tr>
+          <td><%= item.product.product_code %></td>
+          <td><%= item.unit_price %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.unit_price * item.quantity %></td>
+          <td><%= item.tax_amount %></td>
+          <td><%= item.total_price %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <div class="summary">
+      <p><span>Total price without tax</span><span><%= @bill.total_price %></span></p>
+      <p><span>Total tax payable</span><span><%= @bill.total_tax %></span></p>
+      <p><span>Net price</span><span><%= @bill.net_price %></span></p>
+      <p><span>Rounded down value</span><span><%= @bill.net_price.floor %></span></p>
+      <p><span>Balance payable</span><span><%= @bill.balance_amount %></span></p>
+    </div>
+
+    <hr>
+
+    <h3>Balance Denomination</h3>
+
+    <div class="balance-denomination">
+      <% if @bill.balance_amount < 0 %>
+        <p style="color:red">Insufficient amount paid</p>
+      <% else %>
+        <table>
+          <tr>
+            <th>Denomination</th>
+            <th>Count</th>
+          </tr>
+          <% @denominations.each do |note, count| %>
+            <% if count > 0 %>
+              <tr>
+                <td><%= note %></td>
+                <td><%= count %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+
+    <br>
+    <a href="<%= root_path %>" class="back-button">
+        <button type="button">Back</button>
+    </a>
+</div>

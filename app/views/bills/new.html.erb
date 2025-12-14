@@ -1,0 +1,130 @@
+<div class="page-container">
+  <h1>Billing Page</h1>
+
+  <form action="<%= bills_path %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label>Customer Name</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Customer Email</label><br>
+    <input type="email" name="email" required>
+
+    <hr>
+
+    <h3>Bill Section</h3>
+
+    <div id="products">
+      <div class="product-row">
+        <select name="items[][product_code]" required>
+          <option value="">Select Product</option>
+          <% Product.all.each do |product| %>
+            <option value="<%= product.product_code %>">
+              <%= product.name %> (ID: <%= product.product_code %>)
+            </option>
+          <% end %>
+        </select>
+
+        <input type="number" name="items[][quantity]"
+              placeholder="Quantity" min="1" required>
+
+        <button type="button" class="delete-btn" onclick="removeProduct(this)">
+          ❌
+        </button>
+      </div>
+    </div>
+
+
+    <button type="button" onclick="addProduct()">Add New</button>
+
+    <hr>
+
+    <h3>Denominations</h3>
+
+    <div class="denominations">
+      <% [500, 50, 20, 10, 5, 2, 1].each do |d| %>
+        <div class="denom-row">
+          <label><%= d %></label>
+          <input type="number" name="denominations[<%= d %>]" min="0">
+        </div>
+      <% end %>
+    </div>
+
+    <br>
+
+    <label>Cash paid by customer</label><br>
+    <input type="number" name="paid_amount" required>
+
+    <div class="actions">
+      <button type="button" onclick="resetForm()">Cancel</button>
+      <button type="submit">Generate Bill</button>
+      <a href="<%= customers_path %>">
+        <button type="button">View Previous Purchases</button>
+      </a>
+    </div>
+
+  </form>
+</div>
+
+<script>
+function addProduct() {
+  const div = document.createElement("div");
+  div.className = "product-row";
+
+  div.innerHTML = `
+    <select name="items[][product_code]" required>
+      <option value="">Select Product</option>
+      <% Product.all.each do |product| %>
+        <option value="<%= product.product_code %>">
+          <%= product.name %> (ID: <%= product.product_code %>)
+        </option>
+      <% end %>
+    </select>
+
+    <input type="number" name="items[][quantity]"
+           placeholder="Quantity" min="1" required>
+
+    <button type="button" class="delete-btn" onclick="removeProduct(this)">
+      ❌
+    </button>
+  `;
+
+  document.getElementById("products").appendChild(div);
+}
+function resetForm() {
+  const form = document.querySelector("form");
+  form.reset();
+
+  const productsDiv = document.getElementById("products");
+
+  // Keep only ONE product row
+  productsDiv.innerHTML = `
+    <div class="product-row">
+      <select name="items[][product_code]" required>
+        <option value="">Select Product</option>
+        <% Product.all.each do |product| %>
+          <option value="<%= product.product_code %>">
+            <%= product.name %> (ID: <%= product.product_code %>)
+          </option>
+        <% end %>
+      </select>
+
+      <input type="number" name="items[][quantity]"
+             placeholder="Quantity" min="1" required>
+
+      <button type="button" class="delete-btn" onclick="removeProduct(this)">
+      ❌
+      </button>
+    </div>
+  `;
+}
+function removeProduct(button) {
+  const rows = document.querySelectorAll(".product-row");
+  if (rows.length > 1) {
+    button.closest(".product-row").remove();
+  } else {
+    alert("At least one product is required.");
+  }
+}
+
+</script>

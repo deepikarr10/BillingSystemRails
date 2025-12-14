@@ -1,0 +1,201 @@
+/* ===== GENERAL ===== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+/* ===== FORM ===== */
+.billing-form {
+  width: 80%;
+  margin: auto;
+}
+/* ===== INPUTS ===== */
+input, select {
+  width: 180px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+/* ===== PRODUCT ROW ===== */
+.product-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.delete-btn {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.product-row select {
+  width: 300px;
+}
+
+/* ===== DENOMINATIONS ===== */
+.denominations {
+  width: 250px;
+}
+
+.denom-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+/* ===== BUTTONS ===== */
+button {
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.actions {
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 6px;
+  text-align: center;
+}
+
+/* ===== SUMMARY ===== */
+.summary {
+  width: 45%;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.summary p {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ===== BALANCE DENOMINATION ===== */
+.balance-denomination {
+  width: 300px;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+/* ===== PAGE CONTAINER ===== */
+.page-container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+/* ===== HEADER ===== */
+.page-title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+/* ===== SECTION BOX ===== */
+.section-box {
+  border: 1px solid #999;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* ===== LIST ===== */
+ul {
+  padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+/* ===== BACK LINK ===== */
+.back-link {
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* ===== EMAIL INVOICE ===== */
+.invoice-container {
+  width: 90%;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.invoice-header {
+  border-bottom: 1px solid #999;
+  margin-bottom: 15px;
+}
+
+.invoice-summary p {
+  margin: 5px 0;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-button button {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ===== SEARCH BAR UNIFORM SIZE FIX ===== */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+/* LABEL */
+.search-label {
+  font-weight: bold;
+  height: 36px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+/* SAME SIZE FOR SELECT & BUTTON */
+.search-box select,
+.search-box button {
+  height: 36px;
+  line-height: 36px;
+  padding: 0 12px;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* WIDTH CONTROL */
+.search-box select {
+  width: 260px;
+}
+
+.search-box button {
+  width: 100px;
+  cursor: pointer;
+}

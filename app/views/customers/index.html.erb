@@ -1,0 +1,82 @@
+<div class="page-container">
+
+  <div class="page-title">Previous Purchases</div>
+
+  <!-- SEARCH -->
+
+  <form method="get" action="<%= customers_path %>" class="search-box">
+    <span class="search-label">Customer Email</span>
+
+    <select name="email" required>
+      <option value=""> Select Customer </option>
+      <% @customers.each do |customer| %>
+        <option value="<%= customer.email %>"
+          <%= 'selected' if params[:email] == customer.email %>>
+          <%= customer.email %>
+        </option>
+      <% end %>
+    </select>
+
+    <button type="submit">Search</button>
+  </form>
+
+  <hr>
+
+  <% if @customer %>
+    <div class="section-box">
+      <h3>Customer: <%= @customer.email %></h3>
+
+      <h4>Previous Bills</h4>
+
+      <% if @customer.bills.any? %>
+        <ul>
+          <% @customer.bills.order(created_at: :desc).each do |bill| %>
+            <li>
+              <a href="<%= customers_path(email: @customer.email, bill_id: bill.id) %>">
+                Bill #<%= bill.id %> — <%= bill.created_at.strftime("%d %b %Y") %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No bills found.</p>
+      <% end %>
+    </div>
+  <% elsif params[:email].present? %>
+    <p style="color:red;">No purchases found for this email.</p>
+  <% end %>
+
+  <% if @selected_bill %>
+    <div class="section-box">
+      <h3>Bill Details</h3>
+
+      <table>
+        <tr>
+          <th>Product ID</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Tax</th>
+          <th>Total</th>
+        </tr>
+
+        <% @selected_bill.bill_items.each do |item| %>
+          <tr>
+            <td><%= item.product.product_code %></td>
+            <td><%= item.unit_price %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.tax_amount %></td>
+            <td><%= item.total_price %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <br>
+      <strong>Net Price:</strong> <%= @selected_bill.net_price %>
+    </div>
+  <% end %>
+
+  <a href="<%= root_path %>" class="back-button">
+    <button type="button">Back</button>
+  </a>
+
+</div>
