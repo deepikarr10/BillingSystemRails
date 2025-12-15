@@ -157,6 +157,12 @@ ul li {
 }
 
 /* ===== BACK BUTTON ===== */
+.page-actions {
+  display: flex;
+  justify-content: flex-end;   /* right side */
+  margin-top: 40px;
+}
+
 .back-button button {
   padding: 8px 16px;
   font-size: 14px;
